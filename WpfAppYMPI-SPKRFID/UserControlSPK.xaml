@@ -1,0 +1,128 @@
+﻿<UserControl x:Class="WpfAppYMPI_SPKRFID.UserControlSPK"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfAppYMPI_SPKRFID"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="540" d:DesignWidth="1010">
+    <Grid Margin="5" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+            <Grid Grid.Row="1" Margin="5">
+            <StackPanel>
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <StackPanel VerticalAlignment="Bottom">
+                            <TextBlock
+                                Style="{StaticResource MaterialDesignTitleTextBlock}"
+                                Margin="5">
+                                Nomor SPK
+                            </TextBlock>
+                            <TextBox
+                                Margin="5"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                materialDesign:HintAssist.Hint="Nomor SPK"
+                            />
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <StackPanel VerticalAlignment="Bottom">
+                            <TextBlock
+                                Style="{StaticResource MaterialDesignTitleTextBlock}"
+                                Margin="5">
+                                Bagian
+                            </TextBlock>
+                            <ComboBox
+                                Margin="5"
+                                materialDesign:HintAssist.Hint="PM/UT"
+                                IsEditable="True"
+                                materialDesign:HintAssist.HintOpacity=".26">
+                                <ComboBoxItem>Utilities</ComboBoxItem>
+                                <ComboBoxItem>Machine Production</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <StackPanel VerticalAlignment="Bottom">
+                            <TextBlock
+                                Style="{StaticResource MaterialDesignTitleTextBlock}"
+                                Margin="5">
+                                Tanggal Masuk
+                            </TextBlock>
+                            <DatePicker
+                                Margin="5"
+                                Name="LocaleDatePicker"
+                                materialDesign:HintAssist.Hint="Tanggal" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                <Grid>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock
+                            Style="{StaticResource MaterialDesignTitleTextBlock}"
+                            Margin="5">
+                            Jenis Pekerjaan
+                        </TextBlock>
+                        <TextBox
+                            Margin="5"
+                            AcceptsReturn="True"
+                            TextWrapping="Wrap"
+                            VerticalScrollBarVisibility="Auto"/>
+                    </StackPanel>
+                </Grid>
+                <Grid>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock
+                            Style="{StaticResource MaterialDesignTitleTextBlock}"
+                            Margin="5">
+                            Deskripsi
+                        </TextBlock>
+                        <TextBox
+                            Margin="5"
+                            MaxHeight="100"
+                            Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                            AcceptsReturn="True"
+                            TextWrapping="Wrap"
+                            VerticalScrollBarVisibility="Auto"/>
+                    </StackPanel>
+                </Grid>
+                <Grid>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock
+                            Style="{StaticResource MaterialDesignTitleTextBlock}"
+                            Margin="5">
+                            Penanganan
+                        </TextBlock>
+                        <TextBox
+                            Margin="5"
+                            MaxHeight="100"
+                            Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                            AcceptsReturn="True"
+                            TextWrapping="Wrap"
+                            VerticalScrollBarVisibility="Auto"/>
+                    </StackPanel>
+                </Grid>
+                <Grid>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Margin="5">
+                            Simpan
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
