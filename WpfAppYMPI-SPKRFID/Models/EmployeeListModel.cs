@@ -48,18 +48,19 @@ namespace WpfAppYMPI_SPKRFID.Models
         public DataTable EmployeeDataTable
         {
             get
-
             {
                 dbCommand.Connection = dataBaseModel.dbConnection;
                 dbCommand.CommandText = "select * from EmployeeList";
                 OleDbDataAdapter dbDataAdapter = new OleDbDataAdapter(dbCommand);
+                //dataTable.Reset();
+                dataTable.Clear();
                 dbDataAdapter.Fill(dataTable);
                 return dataTable;
             }
 
             set
             {
-
+                
             }
         }
 

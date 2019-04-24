@@ -18,7 +18,7 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="1">
-                            <DataGrid Margin="0 8 0 0" Name="EmployeeDataGrid" ItemsSource="{Binding EmployeeListModel.EmployeeDataTable,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserSortColumns="True" CanUserAddRows="False" SelectionMode="Single" SelectedItem="{Binding EmployeeListModel.SelectedRow,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                            <DataGrid Margin="0 8 0 0" Name="EmployeeDataGrid" ItemsSource="{Binding EmployeeListModel.Instance.EmployeeDataTable,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserSortColumns="True" CanUserAddRows="False" SelectionMode="Single" SelectedItem="{Binding EmployeeListModel.SelectedRow,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                         </ScrollViewer>
                         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
                             <Button Name="btnAdd" Content="Add" Width="120" Margin="5" Command="{Binding ShowEmployeeFormCommand}"/>
