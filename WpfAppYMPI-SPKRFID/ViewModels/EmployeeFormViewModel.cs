@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Prism.Mvvm;
 using Prism.Commands;
 using System.Windows.Input;
+using System.Data.OleDb;
 using WpfAppYMPI_SPKRFID.Models;
 
 namespace WpfAppYMPI_SPKRFID.ViewModels
@@ -13,23 +14,50 @@ namespace WpfAppYMPI_SPKRFID.ViewModels
     class EmployeeFormViewModel : BindableBase
     {
         private EmployeeListModel employeeListModel;
+        public ICommand SaveEmployeeFormCommand { get; private set; }
 
         public EmployeeFormViewModel()
         {
             employeeListModel = EmployeeListModel.Instance;
+            SaveEmployeeFormCommand = new DelegateCommand(OnSaveEmployeeForm);
         }
 
-        public EmployeeListModel EmployeeListModel
+        private void OnSaveEmployeeForm()
         {
-            get
+            OleDbCommand dbCommand = new OleDbCommand();
+            dbCommand.Connection = EmployeeListModel.DataBaseModel.dbConnection;
+            if (EmployeeListModel.Nik != "")
             {
-                return employeeListModel;
+                if (EmployeeListModel.IsNikEditable == true)
+                {
+                    dbCommand.CommandText = "INSERT INTO EmployeeList (NIK,Nama,Jabatan) VALUES ('" + EmployeeListModel.Nik + "','" + EmployeeListModel.Name + "','" + EmployeeListModel.Occupation + "')";
+                    dbCommand.ExecuteNonQuery();
+                }
+                else
+                {
+                    dbCommand.CommandText = "UPDATE EmployeeList SET Nama = '" + EmployeeListModel.Name + "', Jabatan = '" + EmployeeListModel.Occupation + "' WHERE NIK = '" + EmployeeListModel.Nik + "'";
+                    dbCommand.ExecuteNonQuery();
+                }
+                EmployeeListModel.Refresh();
+                MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
             }
+            else
+            {
+                System.Windows.MessageBox.Show("Please add NIK");
+            }
+        }
 
-            set
-            {
-                SetProperty(ref employeeListModel, value);
-            }
+    public EmployeeListModel EmployeeListModel
+    {
+        get
+        {
+            return employeeListModel;
+        }
+
+        set
+        {
+            SetProperty(ref employeeListModel, value);
         }
     }
+}
 }

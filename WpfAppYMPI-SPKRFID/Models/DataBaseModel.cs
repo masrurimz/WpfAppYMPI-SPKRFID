@@ -17,6 +17,9 @@ namespace WpfAppYMPI_SPKRFID.Models
             ConnectionString = "Provider=Microsoft.Jet.Oledb.4.0; Data Source=" + AppDomain.CurrentDomain.BaseDirectory + "\\AppDB.mdb"
         };
 
+        private static readonly DataBaseModel _instance = new DataBaseModel();
+        public static DataBaseModel Instance { get { return _instance; } }
+
         public DataBaseModel()
         {
             

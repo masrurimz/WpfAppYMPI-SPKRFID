@@ -13,14 +13,41 @@ namespace WpfAppYMPI_SPKRFID.Models
 {
     class EmployeeListModel : BindableBase
     {
-        private DataBaseModel dataBaseModel;
+        private DataBaseModel dataBaseModel = DataBaseModel.Instance;
+        public DataBaseModel DataBaseModel
+        {
+            get
+            {
+                return dataBaseModel;
+            }
+
+            set
+            {
+                SetProperty(ref dataBaseModel, value);
+            }
+        }
+
         private OleDbCommand dbCommand = new OleDbCommand();
         private DataTable dataTable = new DataTable();
+        private OleDbDataAdapter dbDataAdapter = new OleDbDataAdapter();
 
         private string _name;
         private string _nik;
         private string _occupation;
         private string _status;
+
+        private bool _isNikEditable;
+        public bool IsNikEditable
+        {
+            get
+            {
+                return _isNikEditable;
+            }
+            set
+            {
+                SetProperty(ref _isNikEditable, value);
+            }
+        }
 
         private DataRowView _selectedRow;
         public DataRowView SelectedRow
@@ -40,27 +67,31 @@ namespace WpfAppYMPI_SPKRFID.Models
 
         public EmployeeListModel()
         {
-            dataBaseModel = new DataBaseModel();
-            if (dataBaseModel.dbConnection.State != ConnectionState.Open)
-                dataBaseModel.dbConnection.Open();
+            if (DataBaseModel.dbConnection.State != ConnectionState.Open)
+                DataBaseModel.dbConnection.Open();
         }
+
+        public void Refresh()
+        {
+            dbCommand.Connection = DataBaseModel.dbConnection;
+            dbCommand.CommandText = "select * from EmployeeList";
+            dbDataAdapter.SelectCommand = dbCommand;
+            dataTable.Clear();
+            dbDataAdapter.Fill(dataTable);
+        }
+
 
         public DataTable EmployeeDataTable
         {
             get
             {
-                dbCommand.Connection = dataBaseModel.dbConnection;
-                dbCommand.CommandText = "select * from EmployeeList";
-                OleDbDataAdapter dbDataAdapter = new OleDbDataAdapter(dbCommand);
-                //dataTable.Reset();
-                dataTable.Clear();
-                dbDataAdapter.Fill(dataTable);
+                Refresh();
                 return dataTable;
             }
 
             set
             {
-                
+                SetProperty(ref dataTable, value);
             }
         }
 

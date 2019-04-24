@@ -14,28 +14,37 @@ namespace WpfAppYMPI_SPKRFID.ViewModels
 {
     class EmployeeListViewModel : BindableBase
     {
-        public ICommand ShowEmployeeFormCommand { get; private set; }
+        public ICommand ShowAddEmployeeFormCommand { get; private set; }
         public ICommand ShowEditEmployeeFormCommand { get; private set; }
         private EmployeeListModel employeeListModel;
 
         public EmployeeListViewModel()
         {
             employeeListModel = EmployeeListModel.Instance;
-            ShowEmployeeFormCommand = new DelegateCommand(OnShowEmployeeForm);
+            ShowAddEmployeeFormCommand = new DelegateCommand(OnAddEmployeeForm);
             ShowEditEmployeeFormCommand = new DelegateCommand(OnEditEmployeeForm);
         }
 
         private void OnEditEmployeeForm()
         {
-            if (EmployeeListModel.SelectedRow != null)
+            try
             {
+                EmployeeListModel.IsNikEditable = false;
                 EmployeeListModel.Instance.Nik = EmployeeListModel.SelectedRow["NIK"].ToString();
                 EmployeeListModel.Instance.Name = EmployeeListModel.SelectedRow["Nama"].ToString();
                 EmployeeListModel.Instance.Occupation = EmployeeListModel.SelectedRow["Jabatan"].ToString();
                 OnShowEmployeeForm();
             }
-            else
+            catch(Exception e)
+            {
                 System.Windows.MessageBox.Show("Please Select one Item");
+            }
+        }
+
+        private void OnAddEmployeeForm()
+        {
+            EmployeeListModel.IsNikEditable = true;
+            OnShowEmployeeForm();
         }
 
         private void ClearAll()

@@ -11,7 +11,7 @@
         <StackPanel>
             <StackPanel Margin="20" MinWidth="300">
                 <TextBlock Text="NIK" />
-                <TextBox Text="{Binding EmployeeListModel.Instance.Nik, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Text="{Binding EmployeeListModel.Instance.Nik, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding EmployeeListModel.Instance.IsNikEditable, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="Nama" Margin="0,10,0,0"/>
                 <TextBox Text="{Binding EmployeeListModel.Instance.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="Jabatan" Margin="0,10,0,0"/>
@@ -22,7 +22,7 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Button Content="Cancel" Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True" Command="{x:Static md:DialogHost.CloseDialogCommand}"/>
-                    <Button Content="Simpan" IsEnabled="True" Grid.Column="1"/>
+                    <Button Content="Simpan" IsEnabled="True" Grid.Column="1" Command="{Binding SaveEmployeeFormCommand}"/>
                 </Grid>
             </StackPanel>
         </StackPanel>
