@@ -25,13 +25,13 @@ namespace WpfAppYMPI_SPKRFID.ViewModels
             ShowEditEmployeeFormCommand = new DelegateCommand(OnEditEmployeeForm);
         }
 
-        private async void OnEditEmployeeForm()
+        private void OnEditEmployeeForm()
         {
             if (EmployeeListModel.SelectedRow != null)
             {
-                EmployeeListModel.Nik = EmployeeListModel.SelectedRow["NIK"].ToString();
-                EmployeeListModel.Name = EmployeeListModel.SelectedRow["Nama"].ToString();
-                EmployeeListModel.Occupation = EmployeeListModel.SelectedRow["Jabatan"].ToString();
+                EmployeeListModel.Instance.Nik = EmployeeListModel.SelectedRow["NIK"].ToString();
+                EmployeeListModel.Instance.Name = EmployeeListModel.SelectedRow["Nama"].ToString();
+                EmployeeListModel.Instance.Occupation = EmployeeListModel.SelectedRow["Jabatan"].ToString();
                 OnShowEmployeeForm();
             }
             else

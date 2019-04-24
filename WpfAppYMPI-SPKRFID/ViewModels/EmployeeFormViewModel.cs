@@ -16,7 +16,7 @@ namespace WpfAppYMPI_SPKRFID.ViewModels
 
         public EmployeeFormViewModel()
         {
-            //employeeListModel = new EmployeeListModel();
+            employeeListModel = EmployeeListModel.Instance;
         }
 
         public EmployeeListModel EmployeeListModel

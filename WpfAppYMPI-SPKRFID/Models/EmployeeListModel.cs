@@ -17,7 +17,7 @@ namespace WpfAppYMPI_SPKRFID.Models
         private OleDbCommand dbCommand = new OleDbCommand();
         private DataTable dataTable = new DataTable();
 
-        private string _name = "karibou";
+        private string _name;
         private string _nik;
         private string _occupation;
         private string _status;
@@ -35,7 +35,7 @@ namespace WpfAppYMPI_SPKRFID.Models
             }
         }
 
-        private static EmployeeListModel _instance = new EmployeeListModel();
+        private static readonly EmployeeListModel _instance = new EmployeeListModel();
         public static EmployeeListModel Instance { get { return _instance; } }
 
         public EmployeeListModel()
