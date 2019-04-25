@@ -30,12 +30,12 @@ namespace WpfAppYMPI_SPKRFID.ViewModels
             {
                 if (EmployeeListModel.IsNikEditable == true)
                 {
-                    dbCommand.CommandText = "INSERT INTO EmployeeList (NIK,NameEmp,Occupation) VALUES ('" + EmployeeListModel.Nik + "','" + EmployeeListModel.Name + "','" + EmployeeListModel.Occupation + "')";
+                    dbCommand.CommandText = "INSERT INTO tbEmployeeList (NIK,NameEmp,Occupation) VALUES ('" + EmployeeListModel.Nik + "','" + EmployeeListModel.Name + "','" + EmployeeListModel.Occupation + "')";
                     dbCommand.ExecuteNonQuery();
                 }
                 else
                 {
-                    dbCommand.CommandText = "UPDATE EmployeeList SET NameEmp = '" + EmployeeListModel.Name + "', Occupation = '" + EmployeeListModel.Occupation + "' WHERE NIK = '" + EmployeeListModel.Nik + "'";
+                    dbCommand.CommandText = "UPDATE tbEmployeeList SET NameEmp = '" + EmployeeListModel.Name + "', Occupation = '" + EmployeeListModel.Occupation + "' WHERE NIK = '" + EmployeeListModel.Nik + "'";
                     dbCommand.ExecuteNonQuery();
                 }
                 EmployeeListModel.Refresh();

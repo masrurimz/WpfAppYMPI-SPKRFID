@@ -89,11 +89,15 @@
     <Compile Include="UserControlSPK.xaml.cs">
       <DependentUpon>UserControlSPK.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\DeleteDialogConfirmViewModel.cs" />
     <Compile Include="ViewModels\EmployeeFormViewModel.cs" />
     <Compile Include="ViewModels\EmployeeListViewModel.cs" />
     <Compile Include="ViewModels\PMViewModel.cs" />
     <Compile Include="ViewModels\SPKFormViewModel.cs" />
     <Compile Include="ViewModels\SPKListViewModel.cs" />
+    <Compile Include="Views\DeleteDialogConfirmView.xaml.cs">
+      <DependentUpon>DeleteDialogConfirmView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EmployeeFormView.xaml.cs">
       <DependentUpon>EmployeeFormView.xaml</DependentUpon>
     </Compile>
@@ -130,6 +134,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlSPK.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DeleteDialogConfirmView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

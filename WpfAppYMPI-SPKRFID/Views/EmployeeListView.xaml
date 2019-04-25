@@ -9,24 +9,17 @@
              xmlns:WpfAppYMPI_SPKRFID="clr-namespace:WpfAppYMPI_SPKRFID" x:Class="WpfAppYMPI_SPKRFID.Views.EmployeeListView"
              mc:Ignorable="d" 
              d:DesignHeight="540" d:DesignWidth="1010">
-    <UserControl.Resources>
-        <WpfAppYMPI_SPKRFID:AppDbDataSet x:Key="appDbDataSet"/>
-        <CollectionViewSource x:Key="qrEmployeeListViewSource" Source="{Binding qrEmployeeList, Source={StaticResource appDbDataSet}}"/>
-        <CollectionViewSource x:Key="employeeListViewSource" Source="{Binding EmployeeList, Source={StaticResource appDbDataSet}}"/>
-        <CollectionViewSource x:Key="tbEmployeeListViewSource" Source="{Binding tbEmployeeList, Source={StaticResource appDbDataSet}}"/>
-    </UserControl.Resources>
     <Grid x:Name="GridMainEmployee">
         <md:DialogHost Identifier="EmployeeFormDialogHost">
             <StackPanel>
                 <md:Card Margin="5" Height="450">
-                    <Grid DataContext="{StaticResource qrEmployeeListViewSource}">
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="45"/>
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="1">
                             <DataGrid Margin="0 8 0 0" Name="EmployeeDataGrid" ItemsSource="{Binding EmployeeListModel.Instance.EmployeeDataTable,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserSortColumns="True" CanUserAddRows="False" SelectionMode="Single" SelectedItem="{Binding EmployeeListModel.SelectedRow,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"/>
-                            <!--<DataGrid ItemsSource="{Binding tbEmployeeListTableAdapter}"/>-->
                         </ScrollViewer>
                         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
                             <Button x:Name="btnAdd" Content="Add" Width="120" Margin="5" Command="{Binding ShowAddEmployeeFormCommand}"/>

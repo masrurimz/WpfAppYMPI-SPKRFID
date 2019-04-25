@@ -9,6 +9,7 @@ using System.Windows.Input;
 using WpfAppYMPI_SPKRFID.Models;
 using MaterialDesignThemes.Wpf;
 using System.Data;
+using System.Data.OleDb;
 
 namespace WpfAppYMPI_SPKRFID.ViewModels
 {
@@ -16,7 +17,7 @@ namespace WpfAppYMPI_SPKRFID.ViewModels
     {
         public ICommand ShowAddEmployeeFormCommand { get; private set; }
         public ICommand ShowEditEmployeeFormCommand { get; private set; }
-        //public ICommand ShowDeleteEmployeeFormCommand { get; private set; }
+        public ICommand ShowDeleteEmployeeFormCommand { get; private set; }
         private EmployeeListModel employeeListModel;
 
         public EmployeeListViewModel()
@@ -24,22 +25,44 @@ namespace WpfAppYMPI_SPKRFID.ViewModels
             employeeListModel = EmployeeListModel.Instance;
             ShowAddEmployeeFormCommand = new DelegateCommand(OnAddEmployeeForm);
             ShowEditEmployeeFormCommand = new DelegateCommand(OnEditEmployeeForm);
-            //ShowDeleteEmployeeFormCommand = new DelegateCommand(OnDeleteEmployeeForm);
+            ShowDeleteEmployeeFormCommand = new DelegateCommand(OnDeleteEmployeeForm);
         }
 
-        //private void OnDeleteEmployeeForm()
-        //{
+        private async void OnDeleteEmployeeForm()
+        {
+            try
+            {
+                FillDataField();
+                var dialog = new Views.DeleteDialogConfirmView();
+                object result = await MaterialDesignThemes.Wpf.DialogHost.Show(dialog, "EmployeeFormDialogHost");
+                if (!(result is bool boolResult && boolResult))
+                {
+                    OleDbCommand dbCommand = new OleDbCommand();
+                    dbCommand.Connection = EmployeeListModel.DataBaseModel.dbConnection;
+                    dbCommand.CommandText = "DELETE FROM tbEmployeeList WHERE NIK='" + EmployeeListModel.Nik + "'";
+                    dbCommand.ExecuteNonQuery();
+                    EmployeeListModel.Refresh();
+                }
+            }
+            catch (Exception)
+            {
+                System.Windows.MessageBox.Show("Please Select one Item");
+            }
+        }
 
-        //}
+        private void FillDataField()
+        {
+            EmployeeListModel.Instance.Nik = EmployeeListModel.SelectedRow["NIK"].ToString();
+            EmployeeListModel.Instance.Name = EmployeeListModel.SelectedRow["NameEmp"].ToString();
+            EmployeeListModel.Instance.Occupation = EmployeeListModel.SelectedRow["Occupation"].ToString();
+        }
 
         private void OnEditEmployeeForm()
         {
             try
             {
                 EmployeeListModel.IsNikEditable = false;
-                EmployeeListModel.Instance.Nik = EmployeeListModel.SelectedRow["NIK"].ToString();
-                EmployeeListModel.Instance.Name = EmployeeListModel.SelectedRow["NameEmp"].ToString();
-                EmployeeListModel.Instance.Occupation = EmployeeListModel.SelectedRow["Occupation"].ToString();
+                FillDataField();
                 OnShowEmployeeForm();
             }
             catch(Exception)
