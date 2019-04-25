@@ -74,7 +74,7 @@ namespace WpfAppYMPI_SPKRFID.Models
         public void Refresh()
         {
             dbCommand.Connection = DataBaseModel.dbConnection;
-            dbCommand.CommandText = "select * from EmployeeList";
+            dbCommand.CommandText = "select * from tbEmployeeList";
             dbDataAdapter.SelectCommand = dbCommand;
             dataTable.Clear();
             dbDataAdapter.Fill(dataTable);

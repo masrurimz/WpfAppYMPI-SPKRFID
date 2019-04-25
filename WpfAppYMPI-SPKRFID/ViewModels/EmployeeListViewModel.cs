@@ -16,6 +16,7 @@ namespace WpfAppYMPI_SPKRFID.ViewModels
     {
         public ICommand ShowAddEmployeeFormCommand { get; private set; }
         public ICommand ShowEditEmployeeFormCommand { get; private set; }
+        //public ICommand ShowDeleteEmployeeFormCommand { get; private set; }
         private EmployeeListModel employeeListModel;
 
         public EmployeeListViewModel()
@@ -23,7 +24,13 @@ namespace WpfAppYMPI_SPKRFID.ViewModels
             employeeListModel = EmployeeListModel.Instance;
             ShowAddEmployeeFormCommand = new DelegateCommand(OnAddEmployeeForm);
             ShowEditEmployeeFormCommand = new DelegateCommand(OnEditEmployeeForm);
+            //ShowDeleteEmployeeFormCommand = new DelegateCommand(OnDeleteEmployeeForm);
         }
+
+        //private void OnDeleteEmployeeForm()
+        //{
+
+        //}
 
         private void OnEditEmployeeForm()
         {
@@ -31,11 +38,11 @@ namespace WpfAppYMPI_SPKRFID.ViewModels
             {
                 EmployeeListModel.IsNikEditable = false;
                 EmployeeListModel.Instance.Nik = EmployeeListModel.SelectedRow["NIK"].ToString();
-                EmployeeListModel.Instance.Name = EmployeeListModel.SelectedRow["Nama"].ToString();
-                EmployeeListModel.Instance.Occupation = EmployeeListModel.SelectedRow["Jabatan"].ToString();
+                EmployeeListModel.Instance.Name = EmployeeListModel.SelectedRow["NameEmp"].ToString();
+                EmployeeListModel.Instance.Occupation = EmployeeListModel.SelectedRow["Occupation"].ToString();
                 OnShowEmployeeForm();
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 System.Windows.MessageBox.Show("Please Select one Item");
             }

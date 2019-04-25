@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="WpfAppYMPI_SPKRFID.Views.EmployeeListView"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,32 +6,38 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:WpfAppYMPI_SPKRFID.Views"
+             xmlns:WpfAppYMPI_SPKRFID="clr-namespace:WpfAppYMPI_SPKRFID" x:Class="WpfAppYMPI_SPKRFID.Views.EmployeeListView"
              mc:Ignorable="d" 
              d:DesignHeight="540" d:DesignWidth="1010">
+    <UserControl.Resources>
+        <WpfAppYMPI_SPKRFID:AppDbDataSet x:Key="appDbDataSet"/>
+        <CollectionViewSource x:Key="qrEmployeeListViewSource" Source="{Binding qrEmployeeList, Source={StaticResource appDbDataSet}}"/>
+        <CollectionViewSource x:Key="employeeListViewSource" Source="{Binding EmployeeList, Source={StaticResource appDbDataSet}}"/>
+        <CollectionViewSource x:Key="tbEmployeeListViewSource" Source="{Binding tbEmployeeList, Source={StaticResource appDbDataSet}}"/>
+    </UserControl.Resources>
     <Grid x:Name="GridMainEmployee">
         <md:DialogHost Identifier="EmployeeFormDialogHost">
             <StackPanel>
-                <materialDesign:Card Margin="5">
-                    <Grid>
+                <md:Card Margin="5" Height="450">
+                    <Grid DataContext="{StaticResource qrEmployeeListViewSource}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="45"/>
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="1">
                             <DataGrid Margin="0 8 0 0" Name="EmployeeDataGrid" ItemsSource="{Binding EmployeeListModel.Instance.EmployeeDataTable,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserSortColumns="True" CanUserAddRows="False" SelectionMode="Single" SelectedItem="{Binding EmployeeListModel.SelectedRow,Mode=TwoWay,UpdateSourceTrigger=LostFocus}"/>
+                            <!--<DataGrid ItemsSource="{Binding tbEmployeeListTableAdapter}"/>-->
                         </ScrollViewer>
                         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Button Name="btnAdd" Content="Add" Width="120" Margin="5" Command="{Binding ShowAddEmployeeFormCommand}"/>
-                            <Button Name="btnEdit" Content="Edit" Width="120" Margin="5" Command="{Binding ShowEditEmployeeFormCommand}"/>
-                            <Button Name="btnDelete" Content="Delete" Width="120" Margin="5"/>
-                            <Button Name="btnCancel" Content="Cancel" Width="120" Margin="5"/>
+                            <Button x:Name="btnAdd" Content="Add" Width="120" Margin="5" Command="{Binding ShowAddEmployeeFormCommand}"/>
+                            <Button x:Name="btnEdit" Content="Edit" Width="120" Margin="5" Command="{Binding ShowEditEmployeeFormCommand}"/>
+                            <Button x:Name="btnDelete" Content="Delete" Width="120" Margin="5" Command="{Binding ShowDeleteEmployeeFormCommand}"/>
+                            <Button x:Name="btnCancel" Content="Cancel" Width="120" Margin="5"/>
                         </StackPanel>
                     </Grid>
-                </materialDesign:Card>
-                <materialDesign:Card Margin="5">
-                    <TextBlock Text="{Binding EmployeeListModel.Nik, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-                </materialDesign:Card>
+                </md:Card>
             </StackPanel>
         </md:DialogHost>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="100" Margin="-265,475,0,-35" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </UserControl>
