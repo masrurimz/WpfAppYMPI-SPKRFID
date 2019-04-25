@@ -20,7 +20,7 @@ namespace WpfAppYMPI_SPKRFID.ViewModels
 
         public SPKListViewModel()
         {
-            
+            sPKModel = SPKModel.Instance;
         }
 
     }

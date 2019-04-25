@@ -53,7 +53,8 @@ namespace WpfAppYMPI_SPKRFID
                 //    GridMain.Children.Add(usc);
                 //    break;
                 case "ItemSPK":
-                    usc = new UserControlSPK();
+                    //usc = new UserControlSPK();
+                    usc = new Views.SPKListView();
                     GridMain.Children.Add(usc);
                     break;
                 case "ItemPM":

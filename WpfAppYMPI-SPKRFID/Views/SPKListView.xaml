@@ -7,7 +7,20 @@
              xmlns:local="clr-namespace:WpfAppYMPI_SPKRFID.Views"
              mc:Ignorable="d" 
              d:DesignHeight="540" d:DesignWidth="1010">
-    <Grid>
-            
-    </Grid>
+    <md:DialogHost>
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+                <!--<Button x:Name="btnAdd" Content="Add" Width="120" Margin="5" Command="{Binding ShowAddSPKFormCommand}"/>
+                <Button x:Name="btnEdit" Content="Edit" Width="120" Margin="5" Command="{Binding ShowEditSPKFormCommand}"/>
+                <Button x:Name="btnDelete" Content="Delete" Width="120" Margin="5" Command="{Binding ShowDeleteSPKFormCommand}"/>-->
+            </StackPanel>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="1">
+                <DataGrid Margin="0 8 0 0" Name="SPKDataGrid" ItemsSource="{Binding SPKModel.Instance.SPKDataTable.qrSPKJobLog, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" CanUserSortColumns="True" CanUserAddRows="False" SelectionMode="Single"/>
+            </ScrollViewer>
+        </Grid>
+    </md:DialogHost>
 </UserControl>

@@ -12,33 +12,34 @@ namespace WpfAppYMPI_SPKRFID.Models
     class SPKModel : BindableBase
     {
         private static readonly SPKModel _instance = new SPKModel();
-        private static SPKModel Instance { get { return _instance; } }
+        public static SPKModel Instance { get { return _instance; } }
         private SPKModel sPKModel = SPKModel.Instance;
         public SPKModel()
         {
-            
+            if (DataBaseModel.dbConnection.State != ConnectionState.Open)
+                DataBaseModel.dbConnection.Open();
         }
 
         private OleDbCommand dbCommand = new OleDbCommand();
-        private DataTable dataTable = new DataTable();
-        public DataTable EmployeeDataTable
+        private AppDbDataSet dataSet = new AppDbDataSet();
+        private AppDbDataSetTableAdapters.qrSPKJobLogTableAdapter dataTableAdapter = new AppDbDataSetTableAdapters.qrSPKJobLogTableAdapter();
+        public AppDbDataSet SPKDataTable
         {
             get
             {
                 Refresh();
-                return dataTable;
+                return dataSet;
             }
 
             set
             {
-                SetProperty(ref dataTable, value);
+                SetProperty(ref dataSet, value);
             }
         }
-        private OleDbDataAdapter dbDataAdapter = new OleDbDataAdapter();
 
         public void Refresh()
         {
-
+            dataTableAdapter.Fill(dataSet.qrSPKJobLog);
         }
 
         private DataBaseModel dataBaseModel = DataBaseModel.Instance;

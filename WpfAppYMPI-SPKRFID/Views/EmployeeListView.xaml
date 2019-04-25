@@ -25,7 +25,6 @@
                             <Button x:Name="btnAdd" Content="Add" Width="120" Margin="5" Command="{Binding ShowAddEmployeeFormCommand}"/>
                             <Button x:Name="btnEdit" Content="Edit" Width="120" Margin="5" Command="{Binding ShowEditEmployeeFormCommand}"/>
                             <Button x:Name="btnDelete" Content="Delete" Width="120" Margin="5" Command="{Binding ShowDeleteEmployeeFormCommand}"/>
-                            <Button x:Name="btnCancel" Content="Cancel" Width="120" Margin="5"/>
                         </StackPanel>
                     </Grid>
                 </md:Card>
